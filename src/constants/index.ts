@@ -9,15 +9,11 @@ const usersRouter = {
 } as const;
 
 const boardsRouter = {
-  sendCertCode: "/auth/cert/sendCertCode",
-  certCodeCheck: "/auth/cert/check",
-  logout: "/auth/logout",
+  getBoards: "boards",
 } as const;
 
 const commentsRouter = {
-  sendCertCode: "/auth/cert/sendCertCode",
-  certCodeCheck: "/auth/cert/check",
-  logout: "/auth/logout",
+  comments: "comments",
 } as const;
 
 export { usersRouter, boardsRouter, commentsRouter };

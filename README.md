@@ -39,16 +39,12 @@
 │   ├── biz           (서버 호출 관리 / 비즈니스별 폴더구조)
 │   ├── components    (화면에서 쓰이는 컴포넌트 / 컴포넌트명 폴더구조)
 │   ├── constants     (상수 정의 파일)
-│   ├── css           (기본 css 및 tailwind 초기 css 설정)
-│   └── json          (정적 데이터 관리 / ex:다국어)
 │   └── layouts       (페이지 레이아웃 관리)
 │   └── model         (데이터 type 관리)
 │   └── pages         (page 단위 소스)
-│   └── res           (정적 리소스 관리)
-│   └── store         (recoil 전역 state 관리)
+│   └── atom         (recoil 전역 state 관리)
 │   └── util          (api 호출 등 util 관리)
 ├── .env.development  (yarn dev 실행시 환경변수 : 개발환경 환경변수)
-├── .env.production   (yarn build 실행시 환경변수 : 운영환경 환경변수)
 ├── next.config.js    (nextjs 구성파일 : Image 태그 주소 등 관리)
 ├── tailwind.config.js(tailwindcss 구성파일)
 ├── tsconfig.json     (typescript 구성파일)
@@ -77,3 +73,7 @@ yarn dev
 ```bash
 yarn build
 ```
+
+## 기술 부채 (to-be 진행사항)
+
+- comment 부분 컴포넌트 분리 및 책임 분리 -> 현재 게시글 상세 코드에 같이 있어 매우 복잡해짐

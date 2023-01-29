@@ -1,31 +1,23 @@
-import Link from "next/link";
 import Label from "components/forms/label";
 import Input from "components/forms/input";
 import Button from "components/buttons";
 import { useState } from "react";
-import { fetchLogin, fetchUserInfo } from "biz/users";
+import { fetchSignup } from "biz/users";
 import LocalStorage from "util/localstorage";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useRouter } from "next/router";
-import { useRecoilState } from "recoil";
-import { userInfoState } from "atom/index";
 
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const router = useRouter();
-
-  const handleSetUserInfo = async () => {
-    const response = await fetchUserInfo();
-    setUserInfo(response.data);
-  };
-
   const handleSubmit = async () => {
-    const response = await fetchLogin({ email, password });
+    const response = await fetchSignup({ email, password, username });
     if (response.message === "로그인 완료") {
       LocalStorage.setItem("token", response.data.token);
-      handleSetUserInfo();
       router.push("/");
     }
   };
@@ -33,12 +25,27 @@ const Login: React.FC = () => {
   return (
     <>
       <div>
+        <AiOutlineArrowLeft
+          className="cursor-pointer"
+          onClick={() => router.push("/login")}
+        />
+      </div>
+      <div className="pt-3">
         <Label text="email" />
         <Input
           placeholder="email"
           type="text"
           value={email}
           onChange={setEmail}
+        />
+      </div>
+      <div className="pt-3">
+        <Label text="username" />
+        <Input
+          placeholder="username"
+          type="text"
+          value={username}
+          onChange={setUsername}
         />
       </div>
       <div className="pt-3">
@@ -51,18 +58,19 @@ const Login: React.FC = () => {
         />
       </div>
       <div className="pt-3">
-        <Button text="Login" width="w-56" onClick={handleSubmit} />
+        <Label text="passwordConfirm" />
+        <Input
+          placeholder="password"
+          type="password"
+          value={passwordConfirm}
+          onChange={setPasswordConfirm}
+        />
       </div>
-      <div className="flex flex-row w-full pt-3">
-        <span className="mr-1 text-secondary">New user?</span>
-        <span>
-          <Link href="/signup">
-            <div className="text-blue-500">Create account here</div>
-          </Link>
-        </span>
+      <div className="pt-3">
+        <Button text="signup" width="w-56" onClick={handleSubmit} />
       </div>
     </>
   );
 };
 
-export default Login;
+export default Signup;
